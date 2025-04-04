@@ -4,6 +4,7 @@ import Data from "./data.js";
 
 const browser = await puppeteer.launch({ headless: false });
 const page = await browser.newPage();
+await page.setDefaultTimeout(60 * 1000);
 
 try {
   await page.goto(Data.urlSAT);

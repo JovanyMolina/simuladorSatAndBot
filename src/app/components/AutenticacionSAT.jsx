@@ -37,7 +37,7 @@ const AutenticacionSAT = () => {
       return;
     }
 
-    const numeroAleatorio = Math.floor(Math.random() * 10);
+    const numeroAleatorio = Math.floor(Math.random() * 11);
     console.log("Número aleatorio:", numeroAleatorio);
 
     Swal.fire({

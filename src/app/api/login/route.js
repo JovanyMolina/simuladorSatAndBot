@@ -1,6 +1,3 @@
-import { redirect } from "next/dist/server/api-utils";
-import Swal from "sweetalert2";
-
 export async function POST(request) {
   const body = await request.json();
   const { certificatePath, keyPath, privateKeyPassword, rfc, modo } = body;
@@ -61,11 +58,20 @@ export async function POST(request) {
         { status: 400 }
       );
     case 9:
-      await new Promise((resolve) => setTimeout(resolve, 200000));
+      await new Promise((resolve) => setTimeout(resolve, 2 * 60 * 1000)); //esto son 2 min
       return Response.json(
         {
           success: false,
           message: "La pagina ha tardado demasiado en responder.",
+          redirect: "/mantenimiento",
+        },
+        { status: 503 }
+      );
+    case 10:
+      return Response.json(
+        {
+          success: false,
+          message: "La pagina se encuentra en mantenimiento.",
           redirect: "/mantenimiento",
         },
         { status: 503 }
