@@ -37,9 +37,6 @@ const AutenticacionSAT = () => {
       return;
     }
 
-    const numeroAleatorio = Math.floor(Math.random() * 11);
-    console.log("Número aleatorio:", numeroAleatorio);
-
     Swal.fire({
       title: "Iniciando sesión...",
       text: "Por favor espera",
@@ -60,22 +57,24 @@ const AutenticacionSAT = () => {
           keyPath,
           privateKeyPassword,
           rfc,
-          modo: numeroAleatorio,
         }),
       });
 
       const data = await res.json();
+      console.log("body: ", data);
+      console.log("status: ", res.status);
 
-      if (data.success) {
+      if (res.status === 200) {
         Swal.close();
-        router.push(data.redirect);
+        router.push("/correcto");
       }
-      if (data.redirect) {
+      if (res.status === 400) {
         Swal.close();
-        router.push(data.redirect);
-      } else {
+        router.push("/error");
+      }
+      if (res.status === 503) {
         Swal.close();
-        setError(data.message);
+        router.push("/mantenimiento");
       }
     } catch (err) {
       Swal.fire({
