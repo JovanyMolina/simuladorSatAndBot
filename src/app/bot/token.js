@@ -20,7 +20,7 @@ export const login = async () => {
       password: Data.password,
     });
     token = login.data;
-    /*  console.log(token); */
+     console.log(token);
   } catch (error) {
     console.log("Error en el token ", error);
     return;
@@ -40,7 +40,7 @@ export const login = async () => {
 
   try {
     const efirma = await axios.get(
-      `http://localhost:8080/api/tenant/${Data.tenantId}/instalacion-procesos/${Data.id}`,
+      `http://localhost:8080/api/tenant/${Data.tenantId}/instalacion-procesos/${Data.proveedorId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ export const login = async () => {
       return;
     }
 
-    /*    console.log("url", certificadoFile); */
+       console.log("url", certificadoFile);
   } catch (error) {
     console.log("Error al consultar la API", error);
     return;
@@ -89,9 +89,9 @@ export const login = async () => {
     await descargaFile(certificadoFile, certificadoTemp);
     await descargaFile(llaveFile, llaveTemp);
 
-    /* console.log("Ruta del certificado:", certificadoTemp);
+    console.log("Ruta del certificado:", certificadoTemp);
     console.log("Ruta de la llave:", llaveTemp);
-    console.log("PasswordKey:", passwordKey); */
+    console.log("PasswordKey:", passwordKey);
 
     return {
       certificadoTemp,
@@ -111,11 +111,11 @@ export async function eliminarArchivosTemp(certificadoTemp, llaveTemp) {
   try {
     if (fs.existsSync(certificadoTemp)) {
       await fs.promises.unlink(certificadoTemp);
-      /*     console.log("Archivo temporal eliminado de certificado"); */
+          console.log("Archivo temporal eliminado de certificado");
     }
     if (fs.existsSync(llaveTemp)) {
       await fs.promises.unlink(llaveTemp);
-      /* console.log("Archivo temporal eliminado de llave"); */
+      console.log("Archivo temporal eliminado de llave");
     }
   } catch (error) {
     console.log("Error al eliminar los archivos temporales", error);
