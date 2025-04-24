@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
+import React from "react";
+import { useRouter } from "next/navigation";
 
 const InicioSesionExitoso = () => {
   const router = useRouter();
 
   const handleContinuar = () => {
-    router.back(); 
+    router.back();
   };
 
   return (
@@ -15,7 +15,13 @@ const InicioSesionExitoso = () => {
       {/* Header estilo SAT */}
       <header className="bg-[#60003b] text-white py-3 shadow">
         <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
-          <h1 className="text-lg font-bold tracking-wide">GOBIERNO DE MÉXICO</h1>
+          <div className=" p-1 rounded">
+            <img
+              src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg"
+              alt="Logo SAT"
+              className="h-10"
+            />
+          </div>{" "}
           <nav className="space-x-4 text-sm">
             <a href="https://www.gob.mx/tramites" className="hover:underline">
               Trámites
@@ -32,9 +38,12 @@ const InicioSesionExitoso = () => {
 
       <main className="py-16 px-4">
         <div className="max-w-xl mx-auto bg-white shadow-md rounded-lg p-8 text-center text-gray-800">
-          <h2 className="text-3xl font-bold text-green-600 mb-4">¡Inicio de sesión exitoso!</h2>
+          <h2 className="text-3xl font-bold text-green-600 mb-4">
+            ¡Inicio de sesión exitoso!
+          </h2>
           <p className="text-base text-gray-700 mb-6">
-            Bienvenido al sistema del SAT. Tu autenticación ha sido completada correctamente.
+            Bienvenido al sistema del SAT. Tu autenticación ha sido completada
+            correctamente.
           </p>
 
           <button
@@ -46,10 +55,13 @@ const InicioSesionExitoso = () => {
 
           {/* Aviso de privacidad */}
           <div className="bg-blue-50 border border-blue-200 text-blue-800 mt-10 p-5 rounded text-sm">
-            <strong className="block mb-1 text-center">Aviso de privacidad simplificado</strong>
+            <strong className="block mb-1 text-center">
+              Aviso de privacidad simplificado
+            </strong>
             <p className="text-center">
-              El Servicio de Administración Tributaria es responsable del tratamiento de los datos personales que se recolectan
-              a través de su portal
+              El Servicio de Administración Tributaria es responsable del
+              tratamiento de los datos personales que se recolectan a través de
+              su portal
               <a
                 href="https://www.sat.gob.mx"
                 target="_blank"

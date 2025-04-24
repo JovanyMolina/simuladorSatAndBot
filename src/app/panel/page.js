@@ -1,4 +1,4 @@
-import CargaCFDI from "../components/CargaCFDI";
+import CargaCFDI from "../components/panelSAT";
 
 export default function Page() {
   return <CargaCFDI />;

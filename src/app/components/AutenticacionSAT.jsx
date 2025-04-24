@@ -94,9 +94,13 @@ const AutenticacionSAT = () => {
       {/* Header estilo SAT */}
       <header className="bg-[#60003b] text-white py-3 shadow">
         <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
-          <h1 className="text-lg font-bold tracking-wide">
-            GOBIERNO DE MÉXICO
-          </h1>
+          <div className=" p-1 rounded">
+            <img
+              src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg"
+              alt="Logo SAT"
+              className="h-10"
+            />
+          </div>
           <nav className="space-x-4 text-sm">
             <a href="https://www.gob.mx/tramites" className="hover:underline">
               Trámites

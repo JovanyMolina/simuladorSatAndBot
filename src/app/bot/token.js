@@ -20,7 +20,7 @@ export const login = async () => {
       password: Data.password,
     });
     token = login.data;
-     console.log(token);
+    console.log(token);
   } catch (error) {
     console.log("Error en el token ", error);
     return;
@@ -52,6 +52,7 @@ export const login = async () => {
     llaveFile = efirma.data.keyFile?.[0]?.downloadUrl;
     passwordKey = efirma.data.passwordKey;
 
+    //console.log("Datos: ", efirma.data);
     if (!certificadoFile || !llaveFile) {
       console.error("No se encontraron archivos ");
       return;
@@ -62,7 +63,7 @@ export const login = async () => {
       return;
     }
 
-       console.log("url", certificadoFile);
+    /* console.log("url", certificadoFile); */
   } catch (error) {
     console.log("Error al consultar la API", error);
     return;
@@ -89,9 +90,9 @@ export const login = async () => {
     await descargaFile(certificadoFile, certificadoTemp);
     await descargaFile(llaveFile, llaveTemp);
 
-    console.log("Ruta del certificado:", certificadoTemp);
+    /*  console.log("Ruta del certificado:", certificadoTemp);
     console.log("Ruta de la llave:", llaveTemp);
-    console.log("PasswordKey:", passwordKey);
+    console.log("PasswordKey:", passwordKey); */
 
     return {
       certificadoTemp,
@@ -111,11 +112,12 @@ export async function eliminarArchivosTemp(certificadoTemp, llaveTemp) {
   try {
     if (fs.existsSync(certificadoTemp)) {
       await fs.promises.unlink(certificadoTemp);
-          console.log("Archivo temporal eliminado de certificado");
+      /*       console.log("Archivo temporal eliminado de certificado");
+       */
     }
     if (fs.existsSync(llaveTemp)) {
       await fs.promises.unlink(llaveTemp);
-      console.log("Archivo temporal eliminado de llave");
+      /*  console.log("Archivo temporal eliminado de llave"); */
     }
   } catch (error) {
     console.log("Error al eliminar los archivos temporales", error);
