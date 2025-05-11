@@ -1,27 +1,33 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const InicioSesionExitoso = () => {
   const router = useRouter();
 
-  const handleContinuar = () => {
-    router.back();
-  };
+  useEffect(() => {
+    // Redirige a /panel después de 3 segundos
+    const timer = setTimeout(() => {
+      router.push("/panel");
+    }, 3000);
+
+    // Limpia el temporizador si el componente se desmonta
+    return () => clearTimeout(timer);
+  }, [router]);
 
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header estilo SAT */}
       <header className="bg-[#60003b] text-white py-3 shadow">
         <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
-          <div className=" p-1 rounded">
+          <div className="p-1 rounded">
             <img
               src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg"
               alt="Logo SAT"
               className="h-10"
             />
-          </div>{" "}
+          </div>
           <nav className="space-x-4 text-sm">
             <a href="https://www.gob.mx/tramites" className="hover:underline">
               Trámites
@@ -45,13 +51,6 @@ const InicioSesionExitoso = () => {
             Bienvenido al sistema del SAT. Tu autenticación ha sido completada
             correctamente.
           </p>
-
-          <button
-            onClick={handleContinuar}
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-          >
-            Continuar
-          </button>
 
           {/* Aviso de privacidad */}
           <div className="bg-blue-50 border border-blue-200 text-blue-800 mt-10 p-5 rounded text-sm">

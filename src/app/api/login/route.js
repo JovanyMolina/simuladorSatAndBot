@@ -11,7 +11,7 @@ export async function POST(request) {
   const numeroAleatorio = Math.floor(Math.random() * 11);
   console.log("Número aleatorio:", numeroAleatorio);
 
-  switch (numeroAleatorio) {
+  switch (3) {
     case 0:
     case 1:
     case 2:

@@ -14,6 +14,8 @@ export const login = async () => {
   let certificadoTemp;
   let llaveTemp;
 
+  let cfdi, cfdiTemp;
+
   try {
     const login = await axios.post("http://localhost:8080/api/auth/sign-in", {
       email: Data.email,
@@ -37,6 +39,22 @@ export const login = async () => {
     console.log("Error en en la autenticacion ", error);
     return;
   } */
+
+  //Descarga del CFDI
+  try {
+    const cfdiDoc = await axios.get(
+      `http://localhost:8080/api/tenant/${Data.tenantId}/cfdi/import`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    cfdi = cfdiDoc.data.documentos?.[0]?.downloadUrl;
+  } catch {
+    console.log("Error en descargar el CDFI ");
+    return;
+  }
 
   try {
     const efirma = await axios.get(
@@ -90,14 +108,11 @@ export const login = async () => {
     await descargaFile(certificadoFile, certificadoTemp);
     await descargaFile(llaveFile, llaveTemp);
 
-    /*  console.log("Ruta del certificado:", certificadoTemp);
-    console.log("Ruta de la llave:", llaveTemp);
-    console.log("PasswordKey:", passwordKey); */
-
     return {
       certificadoTemp,
       llaveTemp,
       passwordKey,
+      cfdi,
     };
   } catch (error) {
     console.log(
@@ -108,16 +123,17 @@ export const login = async () => {
   }
 };
 
-export async function eliminarArchivosTemp(certificadoTemp, llaveTemp) {
+// Eliminar archivos temporales de la E.firma
+export async function deleteTemporaryFiles(certificadoTemp, llaveTemp, cdfi) {
   try {
     if (fs.existsSync(certificadoTemp)) {
       await fs.promises.unlink(certificadoTemp);
-      /*       console.log("Archivo temporal eliminado de certificado");
-       */
     }
     if (fs.existsSync(llaveTemp)) {
       await fs.promises.unlink(llaveTemp);
-      /*  console.log("Archivo temporal eliminado de llave"); */
+    }
+    if (fs.existsSync(cdfi)) {
+      await fs.promises.unlink(cdfi);
     }
   } catch (error) {
     console.log("Error al eliminar los archivos temporales", error);

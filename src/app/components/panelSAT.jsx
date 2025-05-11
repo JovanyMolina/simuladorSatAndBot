@@ -103,10 +103,18 @@ export default function ControlesVolumetricos() {
           <div className="flex justify-between items-center py-2">
             <h1 className="text-2xl font-semibold">CONTROLES VOLUMETRICOS</h1>
             <div className="flex space-x-6">
-              <a href="/enviar" className="text-white hover:underline">
+              <a
+                href="/enviar"
+                id="enviar"
+                className="text-white hover:underline"
+              >
                 Enviar
               </a>
-              <a href="/consulta" className="text-white hover:underline">
+              <a
+                href="/consulta"
+                id="consultas"
+                className="text-white hover:underline"
+              >
                 Consultas
               </a>
             </div>

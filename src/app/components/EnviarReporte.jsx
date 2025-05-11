@@ -168,10 +168,18 @@ export default function ControlesVolumetricos() {
           <div className="flex justify-between items-center py-2">
             <h1 className="text-2xl font-semibold">CONTROLES VOLUMETRICOS</h1>
             <div className="flex space-x-6">
-              <a href="/enviar" className="text-white hover:underline">
+              <a
+                href="/enviar"
+                id="enviar"
+                className="text-white hover:underline"
+              >
                 Enviar
               </a>
-              <a href="/consulta" className="text-white hover:underline">
+              <a
+                href="/consulta"
+                id="consultas"
+                className="text-white hover:underline"
+              >
                 Consultas
               </a>
             </div>
@@ -236,41 +244,49 @@ export default function ControlesVolumetricos() {
         {/* File selection section */}
         <div className="p-6">
           {/* Nueva sección con nuevo diseño de tabla para archivos seleccionados */}
-          <div className="p-6 max-w-9xl mx-auto ">
-            <div className="mb-8 ">
-              <h2 className="text-2xl font-bold text-gray-800 mb-1 ">
-                Seleccione archivo
-              </h2>
-              <div className="border-t-4 border-yellow-500 border-b border-gray-300 mb-4"></div>
-              <div className="flex flex-col space-y-2">
-                <label className="text-gray-700">Archivo:</label>
-                <div className="flex">
-                  <input
-                    type="text"
-                    className="flex-grow border border-gray-300 px-3 py-2 text-black"
-                    value={selectedFile ? selectedFile.name : ""}
-                    readOnly
-                  />
-                  <button
-                    className="bg-pink-800 text-white px-6 py-2"
-                    onClick={() =>
-                      document.getElementById("file-upload").click()
-                    }
-                  >
-                    Buscar
-                  </button>
-                  <input
-                    type="file"
-                    accept=".zip"
-                    className="hidden"
-                    id="file-upload"
-                    onChange={(e) => {
-                      handleFileSelect(e);
-                      setSelectedFile(e.target.files[0]);
-                    }}
-                  />
-                </div>
-              </div>
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-1">
+              Seleccione archivo
+            </h2>
+            <div className="border-t-4 border-yellow-500 border-b border-gray-300 mb-4"></div>
+
+            <label
+              htmlFor="file-upload"
+              className="block font-semibold text-gray-700 mb-1"
+            >
+              Archivo ZIP:
+            </label>
+
+            <div className="flex items-center gap-2">
+              <input
+                id="txtZipFile"
+                name="txtZipFile"
+                type="text"
+                placeholder="Nombre del archivo seleccionado"
+                readOnly
+                value={selectedFile ? selectedFile.name : ""}
+                className="flex-1 border rounded px-3 py-2 w-full text-black"
+              />
+
+              <button
+                type="button"
+                className="bg-pink-800 text-white px-6 py-2 rounded"
+                onClick={() => document.getElementById("file-upload").click()}
+              >
+                Buscar
+              </button>
+
+              <input
+                type="file"
+                accept=".zip"
+                className="hidden"
+                id="file-upload"
+                name="archivoZip"
+                onChange={(e) => {
+                  handleFileSelect(e);
+                  setSelectedFile(e.target.files[0]);
+                }}
+              />
             </div>
           </div>
 
@@ -312,6 +328,7 @@ export default function ControlesVolumetricos() {
                         {(file.status === "process" ||
                           file.status === "new") && (
                           <button
+                            id="enviar"
                             className="px-4 py-1 border border-red-700 text-red-700 text-sm "
                             onClick={() => handleSend(i)}
                           >
@@ -321,6 +338,7 @@ export default function ControlesVolumetricos() {
                         )}
                         {file.status === "signing" && (
                           <button
+                            id="firma"
                             className="px-4 py-1 border border-red-700 text-red-700 text-sm"
                             onClick={() => openSignModal(i)}
                           >
@@ -563,6 +581,7 @@ export default function ControlesVolumetricos() {
                   Cancelar
                 </button>
                 <button
+                  id="agregar"
                   className="px-6 py-2 bg-pink-800 text-white rounded"
                   onClick={saveFileDetails}
                 >
@@ -653,6 +672,7 @@ export default function ControlesVolumetricos() {
                   Cerrar
                 </button>
                 <button
+                  id="submit"
                   className="bg-pink-800 text-white px-6 py-1 rounded"
                   onClick={signFile}
                 >
